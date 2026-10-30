@@ -1,0 +1,48 @@
+test_close_obstacle_stops_motion (test_demo_control.DemoControlTests.test_close_obstacle_stops_motion) ... ok
+test_full_route_clearance_and_landmark_coverage (test_demo_control.DemoControlTests.test_full_route_clearance_and_landmark_coverage) ... ok
+test_augmentation_cross_covariance (test_slam.SlamTests.test_augmentation_cross_covariance) ... ok
+test_measurement_jacobian (test_slam.SlamTests.test_measurement_jacobian) ... ok
+test_motion_jacobians (test_slam.SlamTests.test_motion_jacobians) ... ok
+test_reproducible_and_baseline_improves (test_slam.SlamTests.test_reproducible_and_baseline_improves) ... ok
+test_wrapped_bearing_innovation (test_slam.SlamTests.test_wrapped_bearing_innovation) ... ok
+test_zero_noise_and_covariance (test_slam.SlamTests.test_zero_noise_and_covariance) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.249s
+
+OK
+
+Corrected Gazebo route and visible sensing validation:
+- Eight tests passed, including kinematic route clearance/coverage and safety stop.
+- Isolated headless physics run: 105 s, 1050 samples, all 10 landmarks mapped.
+- 549 synthetic observations; 539 EKF corrections.
+- Minimum robot-to-post centre distance 0.966287 m; conservative combined footprint < 0.45 m.
+- Position RMSE 0.116117 m; odometry RMSE 2.320013 m; final map RMSE 0.030653 m.
+- Separate 12 s GUI/RViz smoke run exited successfully; no RViz initialization errors.
+- Live rays, landmark labels, robot marker and map/update counters published.
+- Independent 120-trial results are unchanged; Gazebo data is a separate experiment.
+- Simulator robot pose guides the separate route controller; EKF receives noisy sensor data only.
+
+Shutdown regression validation:
+- Continuous mode (--duration 0) remained active until signalled.
+- SIGINT: clean exit, saved 21 samples; no traceback or ROS context error.
+- SIGTERM: clean exit, saved 22 samples; no traceback or ROS context error.
+- Shell syntax and Python compilation checks passed.
+
+Offline HTML guide validation (Brave):
+- Guide initialized with no JavaScript runtime errors.
+- Recorded replay playback, scenario switching and dropout status checked.
+- Wheel controls, EKF stepper, source selection, embedded figure selection checked.
+- Quiz feedback and local learning checkpoints checked.
+- Desktop layout and 390-pixel mobile layout visually inspected; no mobile horizontal overflow.
+- Replay and EKF chapter screenshots visually inspected.
+- HTML includes all replay data, plots, source and styling; no network dependency for learning interactions.
+
+Offline replay loop-closure fix validation (2026-10-30):
+- All 11 Python tests passed, including landmark reuse, drift correction, map history and no-reuse checks.
+- Regenerated the 120 paired trials and six seed-7 recordings with actual measurements, map snapshots and association outcomes; numerical metrics unchanged.
+- node scripts/validate_guide_replay.cjs passed for all 1,266 replay frames across six scenarios, map/measurement toggles, closure jumps, dropout and final playback timing.
+- First baseline revisit: 42.1 s, ID 0, 0.241 m scan pose correction, 10 map entries.
+- Final baseline: 530 corrections, 12 returning-landmark scan events, 0.031717 m robot position error.
+- Rebuilt PROJECT_GUIDE.html with current data and source.
+- Browser launch was blocked by workspace socket restrictions; current rendering coordinates and control logic were validated with the Node DOM/canvas harness. The earlier browser visual check above predates this change.

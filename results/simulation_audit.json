@@ -1,0 +1,87 @@
+{
+  "recordings": [
+    {
+      "scenario": "baseline_seed7",
+      "minimum_covariance_eigenvalue": 5.9818614783794716e-05,
+      "updates": 530,
+      "final_pose_error_m": 0.0317172061364927
+    },
+    {
+      "scenario": "high_odometry_noise_seed7",
+      "minimum_covariance_eigenvalue": 8.260629487544488e-05,
+      "updates": 530,
+      "final_pose_error_m": 0.051109956988220566
+    },
+    {
+      "scenario": "high_sensor_noise_seed7",
+      "minimum_covariance_eigenvalue": 0.00026082991824636926,
+      "updates": 529,
+      "final_pose_error_m": 0.03299908287910379
+    },
+    {
+      "scenario": "no_landmark_reuse_seed7",
+      "minimum_covariance_eigenvalue": 0.0014905765031007075,
+      "updates": 0,
+      "final_pose_error_m": 7.5919894481466095
+    },
+    {
+      "scenario": "sensor_dropout_seed7",
+      "minimum_covariance_eigenvalue": 6.51596999051526e-05,
+      "updates": 426,
+      "final_pose_error_m": 0.04631849394633363
+    },
+    {
+      "scenario": "underestimated_noise_seed7",
+      "minimum_covariance_eigenvalue": 7.3277814022747805e-06,
+      "updates": 530,
+      "final_pose_error_m": 0.031717199481687434
+    }
+  ],
+  "saved_trials_checked": 120,
+  "additional_probes": [
+    {
+      "name": "full_zero_noise",
+      "status": "passed",
+      "pose_rmse_m": 5.357772228178732e-10,
+      "map_rmse_m": 1.4438391793113194e-10,
+      "mapped": 10
+    },
+    {
+      "name": "ten_loops",
+      "status": "passed",
+      "pose_rmse_m": 0.34440178709053004,
+      "map_rmse_m": 0.351197015523736,
+      "mapped": 10
+    },
+    {
+      "name": "straight",
+      "status": "passed",
+      "pose_rmse_m": 3.897303655297037,
+      "map_rmse_m": 0.08262988833550579,
+      "mapped": 3
+    },
+    {
+      "name": "stationary",
+      "status": "passed",
+      "pose_rmse_m": 0.029638973561027567,
+      "map_rmse_m": 0.03817513455308584,
+      "mapped": 2
+    },
+    {
+      "name": "no_sensor",
+      "status": "passed",
+      "pose_rmse_m": 0.5844456781292715,
+      "map_rmse_m": null,
+      "mapped": 0
+    }
+  ],
+  "maximum_midpoint_arc_error_m": 6.000020822553435e-05,
+  "scope": "Audited all six saved seed-7 recordings and all 120 saved trial metrics; ran five additional kinematic probes. No fresh Gazebo physics run.",
+  "findings": [
+    "No numerical failures or duplicate landmark identities found in the checked recordings and probes.",
+    "Known IDs are supplied by the synthetic sensor; this does not test object recognition or unknown data association.",
+    "A small final robot position error does not establish map accuracy: seed-7 baseline map RMSE is 0.402161 m; sensor-dropout map RMSE is 2.864753 m.",
+    "The straight-line probe leaves the landmark-covered region; continued odometry drift is expected there.",
+    "The 105 s route ends slightly beyond two complete circles, so its endpoint is not exactly the start."
+  ]
+}

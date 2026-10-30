@@ -1,0 +1,40 @@
+{
+  "duration_s": 105.0,
+  "samples": 1050,
+  "position_rmse_m": 1.1641718230934066,
+  "odometry_rmse_m": 9.407462802992079,
+  "final_map_rmse_m": 0.3021449856888975,
+  "landmarks": 7,
+  "landmark_estimates": {
+    "0": [
+      -1.9972755709832126,
+      0.06737454154694339
+    ],
+    "1": [
+      1.9945237581095,
+      -0.003615357399073779
+    ],
+    "2": [
+      5.015532403938241,
+      1.0051713805286502
+    ],
+    "3": [
+      7.3921276159027345,
+      5.099394852075196
+    ],
+    "4": [
+      5.3710213818421835,
+      9.1241876435998
+    ],
+    "5": [
+      2.3260878729930785,
+      10.211325404701142
+    ],
+    "6": [
+      -1.8152111937887878,
+      10.363760725790536
+    ]
+  },
+  "sensor": "synthetic range-bearing from Gazebo poses; known IDs; no occlusion",
+  "odometry": "encoder-mode Gazebo plugin twist with added Gaussian wheel-travel noise"
+}

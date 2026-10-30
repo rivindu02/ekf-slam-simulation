@@ -1,0 +1,7 @@
+*.csv text eol=lf
+*.pdf binary
+*.docx binary
+*.npz binary
+*.png binary
+*.gif binary
+*.zip binary

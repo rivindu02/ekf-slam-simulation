@@ -1,0 +1,48 @@
+{
+  "duration_s": 27.4,
+  "samples": 274,
+  "position_rmse_m": 0.11421539446187481,
+  "odometry_rmse_m": 0.8226472210872892,
+  "final_map_rmse_m": 0.17056925441914633,
+  "landmarks": 8,
+  "landmark_estimates": {
+    "0": [
+      -1.9767826206982984,
+      0.018232199901439334
+    ],
+    "1": [
+      1.9942928897837602,
+      -0.01033578125920875
+    ],
+    "2": [
+      4.958816816031562,
+      0.9955924375907224
+    ],
+    "3": [
+      6.929513405802392,
+      4.980187050649338
+    ],
+    "4": [
+      4.934394056614777,
+      8.968833227504303
+    ],
+    "5": [
+      1.901262110909615,
+      9.937938318038164
+    ],
+    "6": [
+      -2.1368636839724466,
+      9.792553783778263
+    ],
+    "7": [
+      -5.032720792892691,
+      8.621911214885985
+    ]
+  },
+  "observations": 145,
+  "ekf_updates": 137,
+  "minimum_landmark_center_distance_m": 0.9662866335668886,
+  "controller": "simulator-pose pure pursuit, radius 4 m, centre (0,5); safety stop at 0.8 m",
+  "sensor": "synthetic range-bearing from Gazebo poses; known IDs; no occlusion",
+  "odometry": "encoder-mode Gazebo plugin twist with added Gaussian wheel-travel noise"
+}
