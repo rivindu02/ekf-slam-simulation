@@ -1,0 +1,50 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Global Options:
+    Background Color: 240; 244; 250
+    Fixed Frame: map
+    Frame Rate: 20
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Cell Size: 1
+      Plane Cell Count: 30
+      Color: 160; 170; 185
+    - Class: rviz_default_plugins/Path
+      Name: EKF trajectory
+      Enabled: true
+      Topic:
+        Value: /slam_demo/estimated_path
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 10
+      Color: 30; 90; 220
+      Line Style: Lines
+      Line Width: 0.06
+      Buffer Length: 1
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Landmarks and live detection rays
+      Enabled: true
+      Topic:
+        Value: /slam_demo/estimated_landmarks
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 10
+  Views:
+    Current:
+      Class: rviz_default_plugins/TopDownOrtho
+      Name: Top view
+      Target Frame: map
+      Scale: 42
+      X: 0
+      Y: 4
+      Angle: 0
+Window Geometry:
+  Width: 1100
+  Height: 850
