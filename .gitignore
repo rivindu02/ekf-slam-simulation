@@ -2,3 +2,11 @@
 __pycache__/
 *.pyc
 .devbox-venv/
+
+# Local Gazebo and ROS runtime output.
+*.log
+results/**/ros_logs/
+
+# Rebuildable submission archive and local Git transfer files.
+/EKF_SLAM_Submission.zip
+/.git-transfer/
