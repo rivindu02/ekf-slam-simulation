@@ -76,7 +76,7 @@
     }
   ],
   "maximum_midpoint_arc_error_m": 6.000020822553435e-05,
-  "scope": "Audited all six saved seed-7 recordings and all 120 saved trial metrics; ran five additional kinematic probes. No fresh Gazebo physics run.",
+  "scope": "Kinematic simulation audit: six seed-7 recordings, 120 trial metrics, and five additional trajectory and sensor probes. Gazebo physics is evaluated separately.",
   "findings": [
     "No numerical failures or duplicate landmark identities found in the checked recordings and probes.",
     "Known IDs are supplied by the synthetic sensor; this does not test object recognition or unknown data association.",

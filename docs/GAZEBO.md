@@ -1,29 +1,24 @@
 # Gazebo Classic 11 + ROS 2 Humble demonstration
 
-## Confirmed environment
+## Requirements
 
-The `devbox` Distrobox contains Gazebo Classic 11.10.2, ROS 2 Humble, `gazebo_ros` and `gazebo_plugins`. This project targets Classic, so use `gzserver`/`gzclient`, not `gz sim`. No ROS workspace build or downloaded robot model is required.
+Install Gazebo Classic 11, ROS 2 Humble, `gazebo_ros`, `gazebo_plugins`, and NumPy. The demo was tested with Gazebo Classic 11.10.2. Use `gzserver`/`gzclient`; no ROS workspace build or downloaded robot model is required. A Distrobox container can be used when these dependencies are not installed on the host.
 
-The existing devbox NumPy/Matplotlib pair is incompatible. The ROS adapter only imports NumPy, so that plotting issue does not prevent it from running. Generate plots and reports with the host `.venv`. No container packages were changed.
+Run the ROS adapter with the Python environment supplied by ROS. Use the project `.venv` for plotting and document generation to keep those dependencies separate.
 
 ## Display compatibility
 
-The launcher forces `QT_QPA_PLATFORM=xcb` for `gzclient`. Gazebo Classic uses OGRE/GLX embedded windows; native Wayland caused `Invalid parentWindowHandle` and a GUI crash on this host. The setting applies only to the Gazebo client and leaves your desktop configuration unchanged. A short GUI validation was also run after this correction.
+The launcher forces `QT_QPA_PLATFORM=xcb` for `gzclient`. Gazebo Classic uses OGRE/GLX embedded windows; the X11 backend avoids the `Invalid parentWindowHandle` error that can occur with native Wayland. The setting applies only to the Gazebo client and leaves your desktop configuration unchanged.
 
 ## Run
 
-From the host:
+From the project root, in a terminal with the ROS/Gazebo dependencies installed:
 
 ```bash
-distrobox enter devbox -- bash -lc 'cd "/home/rivindu02/Documents/Robotics Mini Project" && bash gazebo/run_demo.sh gui 105'
-```
-
-Or open devbox and run:
-
-```bash
-cd "/home/rivindu02/Documents/Robotics Mini Project"
 bash gazebo/run_demo.sh gui 105
 ```
+
+If using Distrobox, enter your ROS container first, then change to the cloned project directory and run the same command.
 
 For headless validation:
 
@@ -58,7 +53,7 @@ The differential-drive plugin explicitly sets `odometry_source` to 0 (encoder) r
 
 ## ROS inspection / optional RViz
 
-In another devbox terminal:
+In another terminal with the same ROS environment:
 
 ```bash
 source /opt/ros/humble/setup.bash
@@ -80,9 +75,9 @@ In RViz set Fixed Frame to `map`, add a Path display using `/slam_demo/estimated
 
 ## Outputs
 
-`results/gazebo/trajectory.csv` stores true, odometry-only and EKF poses over time. `metrics.json` stores RMSE, mapped landmark count and estimated coordinates. `server.log` and `ros_logs/` provide diagnostics. A completed 105 s headless run is included. A separate short GUI/RViz smoke run completed without display initialization errors.
+`results/gazebo/trajectory.csv` stores true, odometry-only and EKF poses over time. `metrics.json` stores RMSE, mapped landmark count and estimated coordinates. `server.log` and `ros_logs/` provide diagnostics. Each run replaces these output files. Interrupted runs save partial trajectories, so check `duration_s` and `landmarks` in `metrics.json` before comparing results.
 
-The Gazebo launcher exits and stops its own server after the node reaches the requested duration. Ctrl+C saves partial results if observations have been received. If Gazebo fails to initialize, inspect `server.log`; run the launcher under `timeout 180` for a bounded diagnostic run. A small built-in Python dependency (NumPy) and ROS message packages must be importable in devbox.
+The Gazebo launcher exits and stops its own server after the node reaches the requested duration. Ctrl+C saves partial results if observations have been received. If Gazebo fails to initialize, inspect `server.log`; run the launcher under `timeout 180` for a bounded diagnostic run. A small built-in Python dependency (NumPy) and ROS message packages must be importable in the ROS environment.
 
 To rebuild the SDF after changing `LANDMARKS` in the kinematic simulator, run on the host:
 
@@ -98,7 +93,7 @@ To rebuild the SDF after changing `LANDMARKS` in the kinematic simulator, run on
 
 If a post is reported nearby, the safety stop prevents further motion. Restart the world with the launcher rather than reusing a manually displaced robot. Restart any running demo after updating the project scripts.
 
-The corrected 105 s validation mapped all 10 landmarks from 549 observations, performing 539 EKF corrections. Minimum post-centre distance was 0.966 m (combined footprint conservatively below 0.45 m). Results from the previous open-loop run are retained in `results/gazebo_previous_open_loop/` for provenance; the report uses the corrected run in `results/gazebo/`.
+An earlier 105 s validation mapped all 10 landmarks from 549 observations and performed 539 EKF corrections, with a minimum post-centre distance of 0.966 m. The latest files in `results/gazebo/` may come from a shorter run. Results from the earlier open-loop controller are retained in `results/gazebo_previous_open_loop/` for comparison.
 
 ## Duration and clean interruption
 

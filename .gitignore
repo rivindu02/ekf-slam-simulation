@@ -7,6 +7,5 @@ __pycache__/
 *.log
 results/**/ros_logs/
 
-# Rebuildable submission archive and local Git transfer files.
+# Rebuildable submission archive.
 /EKF_SLAM_Submission.zip
-/.git-transfer/
