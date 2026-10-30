@@ -2,13 +2,12 @@
 
 Mini Project: Implementing State Estimation Filters
 
-Student name: ____________________
+Student name: Kumarage R.V.
 
-Student / registration number: ____________________
+Registration number: 220343B
 
-Module / lecturer: ____________________
+Module / lecturer: EN4594 Autonomous Systems
 
-Submission date: ____________________
 
 ## Abstract
 
