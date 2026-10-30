@@ -2,7 +2,7 @@
 
 A Python implementation of landmark-based Simultaneous Localization and Mapping for a differential-drive robot. An Extended Kalman Filter jointly estimates the robot pose and an initially unknown landmark map from noisy wheel travel and range–bearing measurements.
 
-Includes six simulation scenarios, paired Monte Carlo experiments, an offline interactive replay, and a Gazebo Classic / ROS 2 demonstration.
+Includes six simulation scenarios, paired Monte Carlo experiments, animated results, and a Gazebo Classic / ROS 2 demonstration.
 
 ## Simulation demos
 
@@ -25,7 +25,7 @@ Both animations use the recorded baseline experiment with seed 7. Landmark ident
 - Explicit EKF prediction, range–bearing correction, and correlated landmark initialization.
 - Full robot–landmark covariance, wrapped angle innovations, and Joseph-form covariance updates.
 - Baseline, high sensor noise, high odometry noise, sensor dropout, no landmark reuse, and underestimated noise scenarios.
-- Recorded measurements, map histories, and landmark revisit diagnostics in an offline HTML guide.
+- Recorded measurements, map histories, and landmark revisit diagnostics.
 - Gazebo differential-drive simulation with encoder-mode odometry and RViz visualization.
 
 ## Quick start
@@ -41,9 +41,7 @@ python3 -m venv .venv
 .venv/bin/python scripts/run_experiments.py --trials 20 --animate
 ```
 
-Open [PROJECT_GUIDE.html](PROJECT_GUIDE.html) locally in a browser for the interactive replay, equations, source walkthrough, and recorded results. Use **Next loop closure** to jump to returning landmark IDs and inspect their pose corrections.
-
-The guide is self-contained and works offline. `requirements.txt` provides dependency ranges; `requirements-lock.txt` records the Python 3.14 environment used for the included results.
+`requirements.txt` provides dependency ranges; `requirements-lock.txt` records the Python 3.14 environment used for the included results. The Python suite contains 11 tests covering the estimator, controller, recorded measurements, and landmark reuse.
 
 ## Results
 
@@ -71,17 +69,13 @@ This opens Gazebo and RViz. Use `headless` for a run without windows, or use dur
 
 The demo uses encoder-mode odometry and synthetic landmark measurements. A separate simulator-pose controller follows the demonstration route; simulator pose is not used as an EKF correction. See [docs/GAZEBO.md](docs/GAZEBO.md) for setup, topics, controls, and outputs.
 
-## Reproduce the figures and guide
+## Reproduce the animations
 
 After generating the experiment recordings:
 
 ```bash
 .venv/bin/python scripts/render_mapping_gif.py
-.venv/bin/python scripts/build_guide.py
-node scripts/validate_guide_replay.cjs
 ```
-
-Node.js is only needed for the optional replay logic check. The Python suite contains 11 tests; the replay check covers 1,266 frames across six scenarios. It validates rendering coordinates and controls without testing browser layout.
 
 ## Project layout
 
@@ -92,12 +86,12 @@ Node.js is only needed for the optional replay logic check. The Python suite con
 | [gazebo/](gazebo/) | World, ROS adapter, launcher, and RViz configuration |
 | [scripts/](scripts/) | Experiment runners, visualization, and document builders |
 | [results/](results/) | Recorded arrays, metrics, figures, and GIFs |
-| [docs/](docs/) | Gazebo instructions, presentation outline, and project notes |
-| [report/](report/) | Markdown, PDF, editable DOCX, and presentation |
+| [docs/](docs/) | Gazebo instructions and assignment mapping |
+| [report/](report/) | Report source and generated document outputs |
 
 ## Report and submission
 
-Read the [report PDF](report/EKF_SLAM_Report.pdf) or its [Markdown source](report/report.md) for methodology and analysis. Rebuild the documents and portable submission archive with:
+Read the [report](report/report.md) for methodology and analysis. Generate the PDF, editable DOCX, presentation, and portable submission archive with:
 
 ```bash
 .venv/bin/python scripts/build_report.py
